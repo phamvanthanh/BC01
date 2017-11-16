@@ -1,22 +1,22 @@
 <?php
 namespace App\Models;
 use App\Models\Job;
-use App\Traits\Jobs\SubJobTrait;
-use App\Contracts\Jobs\SubJobInterface;
+use App\Traits\JobTrait;
+use App\Contracts\JobInterface;
 
-class Section extends Job implements SubJobInterface{
+class Section extends Job implements JobInterface{
 
-    protected  $table = 'sections';
-    protected  $fillable = [
+    static protected  $table = 'sections';
+    static protected  $fillable = [
         'job_id',
         'project_id'
     ];
-    protected $type = 'Section';
-    protected static function instance() {
+    static protected $type = 'Section';
+    static protected function instance() {
         return new Section();
     }
-    public $timestamps = false;
+    static protected $timestamps = false;
 
 
-    use SubJobTrait;
+    use JobTrait;
 }

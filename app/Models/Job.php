@@ -1,15 +1,14 @@
 <?php
 namespace App\Models;
-use Illuminate\Database\Eloquent\Model;
-use App\Contracts\Jobs\JobInterface;
+use App\Contracts\ModelInterface;
 use App\Traits\Jobs\JobTrait;
 use App\Traits\ModelTrait;
 use DB;
 
-class Job extends Model implements JobInterface{
-    
-    protected  $table = 'jobs'; 
-    protected  $fillable = [
+class Job  implements ModelInterface{
+    const LIMIT = 50;
+    static protected  $table = 'jobs'; 
+    static protected  $fillable = [
         'name',
         'holder_id',
         'parent_id',
@@ -23,14 +22,9 @@ class Job extends Model implements JobInterface{
  
    
     static protected function instance() {
-        $class = __CLASS__;
-        return new $class();
+        return new Job();     
     }
-  
-   
-    // use ModelTrait;
-    use JobTrait;
-    
-   
-    
+    static protected $timestamps = true;
+    use ModelTrait;
+         
 }

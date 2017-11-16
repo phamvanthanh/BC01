@@ -1,22 +1,21 @@
 <?php
 namespace App\Models;
 use App\Models\Job;
-use App\Traits\Jobs\SubJobTrait;
-use App\Contracts\Jobs\SubJobInterface;
+use App\Traits\JobTrait;
+use App\Contracts\JobInterface;
 
-class Package extends Job implements SubJobInterface{
+class Package extends Job implements JobInterface{
 
-    protected  $table = 'packages';
-    protected  $fillable = [
+    static protected  $table = 'packages';
+    static protected  $fillable = [
         'job_id',
         'section_id'        
     ];
-    protected $type = 'Package';
-    protected static function instance() {
+    static protected $type = 'Package';
+    static protected function instance() {
         return new Package();
     }
-    public $timestamps = false;
+    static protected $timestamps = false;
 
-
-    use SubJobTrait;
+    use JobTrait;
 }
