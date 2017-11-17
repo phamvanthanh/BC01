@@ -1,14 +1,11 @@
 <?php
 namespace App\Models;
-use App\Contracts\ModelInterface;
-use App\Traits\Jobs\JobTrait;
-use App\Traits\ModelTrait;
-use DB;
 
-class Job  implements ModelInterface{
+class Job extends Model{
+    
     const LIMIT = 50;
-    static protected  $table = 'jobs'; 
-    static protected  $fillable = [
+    protected  $table = 'jobs'; 
+    protected  $fillable = [
         'name',
         'holder_id',
         'parent_id',
@@ -19,12 +16,12 @@ class Job  implements ModelInterface{
         'status',
         'bid_status'
     ];
+    protected $timestamps = true;
+    protected $hidden = [];
+    
+    //  static public function _getInstance(){
+    //      return new Job();
+    //  }
  
-   
-    static protected function instance() {
-        return new Job();     
-    }
-    static protected $timestamps = true;
-    use ModelTrait;
-         
+            
 }

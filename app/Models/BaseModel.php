@@ -1,19 +1,19 @@
 <?php
 namespace App\Models;
 
-abstract class Model {
+abstract class BaseModel {
 
-    static protected $table;
-    static protected $fillable;
-    static protected $timestamps;
-    static protected $hidden;
+    protected $table;
+    protected $fillable = [];
+    protected $timestamps = false;
+    protected $hidden = [];
 
-    abstract protected function _find( $value);
-    abstract protected function _get(Array $params);
-    abstract protected function _all();
-    abstract protected function _create(Array $columns);
-    abstract protected function _update(Array $colums);  
-    abstract protected function _delete($value);
-    abstract protected function _geAttribute();
+    abstract static public function _find( $value);
+    abstract static public function _get(Array $params);
+    abstract static public function _all();
+    abstract static public function _create(Array $columns);
+    abstract static public function _update(Array $colums);  
+    abstract static public function _delete($value);
+    abstract static public function _getAttribute();
     
 }

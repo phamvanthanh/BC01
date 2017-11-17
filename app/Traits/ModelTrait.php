@@ -27,6 +27,7 @@ trait ModelTrait {
             return $table.'.'.$e;
         },$selectable);
      }
+     
 
     static public function _find($value) {
         $selectable = self::_getSelectable();
@@ -38,33 +39,8 @@ trait ModelTrait {
             ->first();
                 
      }
-     static protected function _buildPaginateSelectQuery(Array $params) {
-          extract($params); 
-          $table = self::_getTableName();
-          $selectable = self::_getSelectable();         
-
-          $limit = (isset($limit) && is_integer($limit))? $limit : self::LIMIT;
-          $ascending = (isset($ascending) && $ascending) == 1? 'ASC' : 'DESC';
-          $orderBy = isset($orderBy) ? $orderBy: $table.'.id';
-          $query = isset($query) ? $query: '';
-          
-          $whereCondition = '';
-
-          foreach($selectable as $field) {
-              $whereCondition .= '->orWhere("'.$field.'", "LIKE", "%'.$query.'%")';
-          }
-
-          return '->select(["'.implode('","',$selectable).'"])'.$whereCondition.'->orderBy("'.$orderBy.'","'. $ascending.'")->paginate('.$limit.')->toArray();';   
-         
-           
-     } 
-     static protected function _buildJoinedTable() {
-          $table = self::_getTableName();
-          return 'DB::table("'.$table.'")';
-
-     }
-
-     static public function _get(Array $params) {
+    
+     static public function _get(Array $params = []) {
          $joinedTable = self::_buildJoinedTable();
          $selectQuery = self::_buildPaginateSelectQuery($params);
          return eval('return '.$joinedTable.$selectQuery);

@@ -1,26 +1,20 @@
 <?php
 namespace App\Models;
-use App\Models\Job;
-use App\Traits\ModelTrait;
-use App\Traits\JobTrait;
-use App\Contracts\JobInterface;
+use App\Traits\SpecializedJobTrait;
 
-class Project extends Job implements JobInterface{
+  class Project extends Model {
 
-   static protected  $table = 'projects';
-   static protected  $fillable = [
+   protected  $table = 'projects';
+   protected  $fillable = [
         'job_id',
         'client_id',
         'nation_abbr',
         'industry_abbr',
         'description'
     ];
-  static protected $type = 'Project';
-    protected static function instance() {
-        return new Project();
-    }
-  static protected $timestamps = false;
+  protected $type = 'Project';
+  protected $timestamps = false;
+ 
 
-  
-    use JobTrait;
+  use SpecializedJobTrait;
 }

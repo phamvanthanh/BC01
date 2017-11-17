@@ -1,7 +1,7 @@
 <?php
 namespace App\Models;
 use App\Models\Job;
-use App\Traits\JobTrait;
+use App\Traits\SpecializedJobTrait;
 use App\Contracts\JobInterface;
 
 class Package extends Job implements JobInterface{
@@ -17,5 +17,5 @@ class Package extends Job implements JobInterface{
     }
     static protected $timestamps = false;
 
-    use JobTrait;
+    use SpecializedJobTrait;
 }

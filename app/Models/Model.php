@@ -1,21 +1,27 @@
 <?php 
+namespace App\Models;
 use App\Models\BaseModel;
 use DB;
 
 abstract class Model extends BaseModel {
-        
-     static protected function _getTableName() {
-        return self::$table;
+     const LIMIT = 50;  
+   
+     static public function _getInstance(){
+         return new static();
+     }
+     static public function _getTableName() {
+        return self::_getInstance()->table;
      }
 
-     static protected function _getFillable() {
-        return self::$fillable;
+     static public function _getFillable() {
+        return self::_getInstance()->fillable;
      }
  
-     static protected function _getAttribute() {
-        $table = self::_getTableName();
-        $selectable = self::_getFillable();
-        if(self::$timestamps === false)
+     static public function _getAttribute() {
+        $instance = self::_getInstance();
+        $table = $instance->table;
+        $selectable = $instance->fillable;
+        if($instance->timestamps === false)
             array_unshift($selectable, 'id');
         else
             array_unshift($selectable, 'id', 'created_at', 'updated_at');
@@ -24,14 +30,14 @@ abstract class Model extends BaseModel {
             return $table.'.'.$e;
         },$selectable);
      }
-     static private function _buildJoinedTable() {
+     static protected function _buildJoinedTable() {
           $table = self::_getTableName();
           return 'DB::table("'.$table.'")';
      }
      static protected function _buildPaginateSelectQuery(Array $params) {
           extract($params); 
           $table = self::_getTableName();
-          $selectable = self::_getAttribute();         
+          $selectable = static::_getAttribute();         
 
           $limit = (isset($limit) && is_integer($limit))? $limit : self::LIMIT;
           $ascending = (isset($ascending) && $ascending) == 1? 'ASC' : 'DESC';
@@ -49,6 +55,7 @@ abstract class Model extends BaseModel {
      } 
      
      static public function _find($value) {
+        
         $selectable = self::_getAttribute();
         $table = self::_getTableName();
       
@@ -60,7 +67,7 @@ abstract class Model extends BaseModel {
      }
 
      static public function _get(Array $params) {
-         $joinedTable = self::_buildJoinedTable();
+         $joinedTable = static::_buildJoinedTable();
          $selectQuery = self::_buildPaginateSelectQuery($params);
          return eval('return '.$joinedTable.$selectQuery);
      }
@@ -89,5 +96,9 @@ abstract class Model extends BaseModel {
           ->get()
           ->toArray();   
 
+     }
+     static public function _delete($value) {
+         $table = self::_getTableName();
+         DB::table($table)->where('id',  $value)->delete();
      }
 }
