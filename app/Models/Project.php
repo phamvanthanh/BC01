@@ -13,8 +13,7 @@ use App\Traits\SpecializedJobTrait;
         'description'
     ];
   protected $type = 'Project';
-  protected $timestamps = false;
- 
+  public $timestamps = false;
 
   use SpecializedJobTrait;
 }

@@ -15,8 +15,7 @@ interface JobInterface
      * @param  string $value ('active' / 'finished' / 'pending' )
      * @return array
      */
-    
-    
+        
     // Extend methods and properties from job
 
      static public function _getJobsByStatus($value);

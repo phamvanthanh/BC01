@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Project;
+use App\Models\Job;
 
-class ProjectController extends Controller
+class JobController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,21 +17,23 @@ class ProjectController extends Controller
     }
     /**
     * @param job_id
-    * @return Project Model
+    * @return Job Model
     *
     */ 
     public function show($id) {
-        return Project::find($id);
+        return Job::find($id);
     }
 
     /**
     * @param void
-    * @return Array of Project Models
+    * @return Array of Job Models
     *
     */ 
     public function all() {
-        return Project::all();
+        return Job::all();
     }
+
+    
     
     /**
     * @param Request $request
@@ -40,7 +42,7 @@ class ProjectController extends Controller
     */
     public function create() {
 
-        return Project::create();
+        return Job::create();
     }
 
      /**
@@ -50,7 +52,7 @@ class ProjectController extends Controller
     */
     public function update() {
 
-        return Project::update();
+        return Job::update();
     }
     
 

@@ -17,6 +17,5 @@ class Section extends Job implements JobInterface{
     }
     static protected $timestamps = false;
 
-
     use SpecializedJobTrait;
 }

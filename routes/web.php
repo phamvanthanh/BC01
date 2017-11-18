@@ -14,3 +14,6 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+$router->get('all', 'JobController@all');
+$router->get('eall', 'EJobController@all');
+$router->get('projects', 'ProjectController@all');

@@ -1,8 +1,7 @@
 <?php 
 namespace App\Traits;
-// use App\Traits\ModelTrait;
 use App\Models\Job;
-use DB;
+
  
 trait SpecializedJobTrait {
    
@@ -40,7 +39,7 @@ trait SpecializedJobTrait {
           return 'DB::table("'.$table.'")->join("'.$job_table.'","'.$table.'.job_id","'.$job_table.'.id")';
 
     }
-    static public function _find($value) {
+    static public function find($value) {
       
        $selectable = self::_getAttribute();
        $table = self::_getTableName();
@@ -53,7 +52,7 @@ trait SpecializedJobTrait {
 
     }
     
-    static public function _all() {
+    static public function all() {
 
         
        $selectable = self::_getAttribute();
@@ -67,7 +66,7 @@ trait SpecializedJobTrait {
 
     }
 
-    static public function _create(array $columns) {
+    static public function create(array $columns) {
         $parent = Job::getInstance();
         $parent_fillable = $parent->fillable;
         $column['type'] = $parent->type;        
@@ -82,7 +81,7 @@ trait SpecializedJobTrait {
 
     }
 
-    static public function _update(array $columns) {
+    static public function update(array $columns) {
          $parent = self::_getJobInstance();         
          $parent_fillable = $parent->fillable;
          array_push($parent_fillable, 'id');
@@ -97,7 +96,7 @@ trait SpecializedJobTrait {
            ->update($table_columns);
 
     }
-     static public function _getJobsByStatus($status) {
+     static public function getJobsByStatus($status) {
          $selectable = self::_getAttribute();
          $table = self::_getTableName();
          $job_table = self::_getJobTableName();
@@ -136,7 +135,7 @@ trait SpecializedJobTrait {
 
     }
 
-    static public function _delete($value) {
+    static public function delete($value) {
         return Job::delete($value);
     }
 

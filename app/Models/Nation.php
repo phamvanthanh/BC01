@@ -16,6 +16,4 @@ class Nation extends Model{
         return new Nation();
     }
   
-   
-    
 }

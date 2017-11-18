@@ -50,11 +50,12 @@ abstract class Model extends BaseModel {
               $whereCondition .= '->orWhere("'.$field.'", "LIKE", "%'.$query.'%")';
           }
 
-          return '->select(["'.implode('","',$selectable).'"])'.$whereCondition.'->orderBy("'.$orderBy.'","'. $ascending.'")->paginate('.$limit.')->toArray();';   
+          return '->select(["'.implode('","',$selectable).'"])'.$whereCondition.'->orderBy("'.$orderBy.'","'. $ascending.'")->paginate('.$limit.');';   
                     
      } 
-     
-     static public function _find($value) {
+
+         
+     static public function find($value) {
         
         $selectable = self::_getAttribute();
         $table = self::_getTableName();
@@ -66,13 +67,13 @@ abstract class Model extends BaseModel {
                 
      }
 
-     static public function _get(Array $params) {
+     static public function get(Array $params) {
          $joinedTable = static::_buildJoinedTable();
          $selectQuery = self::_buildPaginateSelectQuery($params);
          return eval('return '.$joinedTable.$selectQuery);
      }
 
-     static public function _create(array $columns) {
+     static public function create(array $columns) {
                      
         $table = self::_getTableName();        
         return DB::table($table)
@@ -80,7 +81,7 @@ abstract class Model extends BaseModel {
               
      }
 
-     static public function _update(array $columns) {
+     static public function update(array $columns) {
         $table = self::_getTableName(); 
         return DB::table($table)
                  ->where('id', $columns['id'])
@@ -88,16 +89,16 @@ abstract class Model extends BaseModel {
 
 
      }
-     static public function _all() {
+     static public function all() {
           $table = self::_getTableName();
           $fillable = self::_getAttribute();          
           return DB::table($table)        
           ->select($fillable)          
-          ->get()
-          ->toArray();   
+          ->get();
+        //   ->toArray();   
 
      }
-     static public function _delete($value) {
+     static public function delete($value) {
          $table = self::_getTableName();
          DB::table($table)->where('id',  $value)->delete();
      }

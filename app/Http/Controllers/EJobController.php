@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
-use App\Models\Project;
+use App\Models\EJob;
 
-class ProjectController extends Controller
+class EJobController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -16,22 +16,23 @@ class ProjectController extends Controller
         //
     }
     /**
-    * @param job_id
-    * @return Project Model
+    * @param EJob_id
+    * @return EJob Model
     *
     */ 
     public function show($id) {
-        return Project::find($id);
+        return EJob::find($id);
     }
 
     /**
     * @param void
-    * @return Array of Project Models
+    * @return Array of EJob Models
     *
     */ 
     public function all() {
-        return Project::all();
+        return EJob::all();
     }
+
     
     /**
     * @param Request $request
@@ -40,7 +41,7 @@ class ProjectController extends Controller
     */
     public function create() {
 
-        return Project::create();
+        return EJob::create();
     }
 
      /**
@@ -50,7 +51,7 @@ class ProjectController extends Controller
     */
     public function update() {
 
-        return Project::update();
+        return EJob::update();
     }
     
 

@@ -30,7 +30,7 @@ class ProjectController extends Controller
     *
     */ 
     public function all() {
-        return Project::all();
+        return Project::with('job')->all();
     }
     
     /**

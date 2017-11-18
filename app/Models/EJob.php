@@ -1,7 +1,8 @@
 <?php
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-class Job extends Model{
+class EJob extends Model {
     
     const LIMIT = 50;
     protected  $table = 'jobs'; 
@@ -18,5 +19,5 @@ class Job extends Model{
     ];
     public $timestamps = true;
     protected $hidden = [];
-       
+           
 }
